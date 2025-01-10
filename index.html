@@ -14,8 +14,27 @@
         height: 70vh;
     }
 
-    #toggleCamera{
-        z-index: 999999;
+    #toggleCamera {
+        position: fixed; /* 固定位置 */
+        bottom: 20px;    /* 距離底部 20px */
+        right: 20px;     /* 距離右側 20px */
+        z-index: 999999; /* 保證按鈕在最上層 */
+        background-color: #007bff; /* 背景顏色 */
+        color: #fff;              /* 字體顏色 */
+        border: none;             /* 無邊框 */
+        border-radius: 50%;       /* 圓形按鈕 */
+        width: 60px;              /* 按鈕寬度 */
+        height: 60px;             /* 按鈕高度 */
+        font-size: 18px;          /* 字體大小 */
+        display: flex;            /* 居中對齊 */
+        align-items: center;      /* 垂直居中 */
+        justify-content: center;  /* 水平居中 */
+        cursor: pointer;          /* 滑鼠樣式 */
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* 陰影效果 */
+    }
+
+    #toggleCamera:hover {
+        background-color: #0056b3; /* 滑鼠懸停時顏色 */
     }
 </style>
 
