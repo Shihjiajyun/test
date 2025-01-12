@@ -101,31 +101,21 @@
             }
 
             Html5Qrcode.getCameras()
-                .then(cameras => {
-                    if (cameras.length > 0) {
-                        const backCamera = cameras.find(camera => camera.label.toLowerCase().includes("back"));
-                        const frontCamera = cameras.find(camera => camera.label.toLowerCase().includes("front"));
+    .then(cameras => {
+        if (cameras.length === 0) {
+            alert("未找到任何相機，請檢查權限或設備是否支持相機。");
+        } else {
+            let cameraInfo = "找到的相機列表：\n";
+            cameras.forEach(camera => {
+                cameraInfo += `名稱: ${camera.label || "未命名"}, ID: ${camera.id}\n`;
+            });
+            alert(cameraInfo); // 使用 alert 顯示所有相機資訊
+        }
+    })
+    .catch(err => {
+        alert(`訪問相機時出錯：${err.message}`);
+    });
 
-                        // 預設啟動後置鏡頭
-                        const initialCamera = backCamera || cameras[0];
-                        startCamera(initialCamera.id);
-
-                        document.getElementById("toggleCamera").addEventListener("click", () => {
-                            html5QrCode.stop().then(() => {
-                                isUsingFrontCamera = !isUsingFrontCamera;
-                                const newCamera = isUsingFrontCamera ? (frontCamera || cameras[0]) : (backCamera || cameras[0]);
-                                startCamera(newCamera.id);
-                            }).catch(err => {
-                                console.error("Error stopping camera:", err);
-                            });
-                        });
-                    } else {
-                        console.error("No cameras found.");
-                    }
-                })
-                .catch(err => {
-                    console.error("Error accessing cameras:", err);
-                });
         });
     </script>
 
